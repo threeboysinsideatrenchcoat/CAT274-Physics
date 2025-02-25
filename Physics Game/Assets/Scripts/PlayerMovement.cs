@@ -37,13 +37,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Treasure")
         {
-            score++;
+          //score++;
+            GameManager.Instance.Score++; 
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "Enemy")
         {
-            score--;
+            //score--;
+            GameManager.Instance.Score--;
             Destroy(gameObject);
             //BRINGING TO END SCENE IF PLAYER DIES vvvvvvvvv
             //SceneManagement.LoadScene(SceneManager.GetActoveScene().buildIndex + 1); 
