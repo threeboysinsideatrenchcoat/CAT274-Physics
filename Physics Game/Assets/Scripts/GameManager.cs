@@ -4,6 +4,7 @@ using System.IO;
 using System; 
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,17 +19,17 @@ public class GameManager : MonoBehaviour
     // public float endTime = 15.0f
     const string DIR_DATA = "/Data/";
     const string FILE_HIGH__SCORE = "highScore.txt";
-    string PATH_HIGH_SCORE; 
+    string PATH_HIGH_SCORE;
 
     public int Score
     {
         get { return score; }
         set
         {
-            score = value; 
+            score = value;
             if (score > HighScore)
             {
-                HighScore = score; 
+                HighScore = score;
             }
         }
     }
@@ -63,14 +64,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PATH_HIGH_SCORE = Application.dataPath + DIR_DATA + FILE_HIGH__SCORE; 
+        PATH_HIGH_SCORE = Application.dataPath + DIR_DATA + FILE_HIGH__SCORE;
 
-      //myPlayer = FindObjectOfType<PlayerMovement>();
+        //myPlayer = FindObjectOfType<PlayerMovement>();
         //highScoreDisplay.enabled = false;
         if (File.Exists(PATH_HIGH_SCORE))
         {
             HighScore = Int32.Parse(File.ReadAllText(PATH_HIGH_SCORE));
- 
+
         }
     }
 
@@ -78,13 +79,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         scoreDisplay.text = "Score: " + Score;
-        highScoreDisplay.text = "High Score: " + HighScore; 
+        highScoreDisplay.text = "High Score: " + HighScore;
 
-        //endTime -= Time.deltaTime; 
-        //if(endTime <= 0.0f)
-        //{
-          //  highScoreDisplay.enabled = true;
-        //}
-       //core = myPlayer.score; 
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
