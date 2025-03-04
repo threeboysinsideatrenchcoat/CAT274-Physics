@@ -9,6 +9,8 @@ TagManager:
   - Treasure
   - Portal
   - Fall
+  - HighScore
+  - Score
   layers:
   - Default
   - TransparentFX

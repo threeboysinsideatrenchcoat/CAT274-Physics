@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public PlayerMovement myPlayer;
+    //public PlayerMovement myPlayer;
     private int score;
 
     public TextMeshProUGUI highScoreDisplay;
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
 
         //myPlayer = FindObjectOfType<PlayerMovement>();
         //highScoreDisplay.enabled = false;
+
         if (File.Exists(PATH_HIGH_SCORE))
         {
             HighScore = Int32.Parse(File.ReadAllText(PATH_HIGH_SCORE));
@@ -78,12 +79,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        highScoreDisplay = GameObject.FindGameObjectWithTag("HighScore").GetComponent<TextMeshProUGUI>();
+        scoreDisplay = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>();
+
         scoreDisplay.text = "Score: " + Score;
         highScoreDisplay.text = "High Score: " + HighScore;
 
         if (Input.GetKey(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Score = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
